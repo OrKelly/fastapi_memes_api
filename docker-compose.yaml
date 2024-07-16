@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:15
+    restart: always
+    container_name: meme_db
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  memes:
+    image: meme_image
+    build:
+      context: .
+    container_name: memes_app
+    env_file:
+      - .env
+    depends_on:
+      - db
+      - storage
+    command: ['/app/docker_startup/app.sh']
+    ports:
+      - 7777:8000
+
+  storage:
+    image: minio/minio
+    restart: always
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    env_file:
+      - .env
+    volumes:
+      - minio_data:/var/lib/minio/data
+    command: server --console-address :9001 --address 0.0.0.0:9000 /data
+
+volumes:
+  postgres_data:
+  minio_data:

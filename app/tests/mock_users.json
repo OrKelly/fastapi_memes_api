@@ -1,0 +1,10 @@
+[
+    {
+        "login": "test",
+        "password": "$2b$12$c2YyrsdU5hmGCshS3BzhLeZfybmvcQK6x17Hdqtiq15KBk.upfOU2"
+    },
+    {
+        "login": "example",
+        "password": "$2b$12$c2YyrsdU5hmGCshS3BzhLeZfybmvcQK6x17Hdqtiq15KBk.upfOU2"
+    }
+]
